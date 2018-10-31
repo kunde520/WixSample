@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <UI>
+      <Dialog Id="SecondDlg" Width="370" Height="270" Title="Amazing Software 2" NoMinimize="no">
+        <Control Id="End" Type="PushButton" X="180" Y="243" Width="100" Height="17" Text="End">
+          <Publish Event="EndDialog" Value="InstallDlg" />
+        </Control>
+      </Dialog>
+    </UI>
+  </Fragment>
+</Wix>

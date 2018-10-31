@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Apex Central" Language="1033" Version="1.0.0.0" Manufacturer="Trend Micro" UpgradeCode="4335c7eb-00fa-4d43-8a7f-af6eeadef184">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <!--<UIRef Id="WixUI_Minimal" />-->
+    <!--<UIRef Id="WixUI_FeatureTree" />-->
+    <!--<UIRef Id="WixUI_Mondo" />-->
+
+    <!--<UIRef Id="WixUI_Advanced" />
+    <UIRef Id="WixUI_InstallDir" />-->
+    <UIRef Id="CustomWizard"/>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="SetupProject1" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+    <Feature Id="OptionalTools"
+      Title="Optional Tools"
+      Level="1">
+      <ComponentRef Id="CMP_ToolsEXE" />
+      <!--<ComponentRef Id="SQL_EXPRESS" />-->
+    </Feature>
+    <InstallUISequence>
+      <Show Dialog="InstallDlg"
+      Before="ExecuteAction" />
+    </InstallUISequence>
+    <InstallExecuteSequence>
+      <!--<Custom Action="ExtractSQLEXPRESS" Before="InstallFiles"  />-->
+      <!--<Custom Action="InstallSQLEXPRESS" After="InstallFiles" />-->
+    </InstallExecuteSequence>
+    <!--<CustomAction Id="ExtractSQLEXPRESS" Execute="deferred" Return="check" Directory="TempFolder" ExeCommand="[TempFolder]SQLEXPR_x64_ENU.exe /QS /ACTION=Install /IAcceptSQLServerLicenseTerms=True /Features=SQLEngine /InstanceName=SQLEXPRESS /SECURITYMODE=SQL /SAPWD=&quot;P@ssw0rd&quot; /NPENABLED=1 /TCPENABLED=1 /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot; /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS=&quot;BUILTIN\ADMINISTRATORS&quot;" Impersonate="no"/>-->
+    <!--<CustomAction Id="InstallSQLEXPRESS" Execute="deferred" Return="check" Directory="TempExtacted" ExeCommand="[TempExtacted]SETUP.exe /QS /ACTION=Install /IAcceptSQLServerLicenseTerms=True /Features=SQLEngine /InstanceName=SQLEXPRESS /SECURITYMODE=SQL /SAPWD=&quot;P@ssw0rd&quot; /NPENABLED=1 /TCPENABLED=1 /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot; /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS=&quot;BUILTIN\ADMINISTRATORS&quot;" Impersonate="no"/>-->
+    <!--
+    /QS /ACTION=Install /IAcceptSQLServerLicenseTerms=True /Features=SQLEngine /InstanceName=SQLEXPRESS /SECURITYMODE=SQL /SAPWD="P@ssw0rd" /NPENABLED=1 /TCPENABLED=1 /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCACCOUNT="NT AUTHORITY\NETWORK SERVICE" /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS"
+    -->
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupProject1" >
+         <Directory Id="MyFirstSubDir" Name="Subdirectory 1">
+            <Directory Id="MySecondSubDir" Name="Subdirectory 2" />
+         </Directory>
+        </Directory>
+			</Directory>
+      <Directory Id="TempFolder">
+        <Directory Id="TempSQLEXPRESSDir" Name="TempSQLEXPRESSDir">
+          <Directory Id="TempExtacted" Name="SQLTempExtacted" />
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder">
+        <!--<Directory Id="DesktopSQLEXPRESSDir" Name="DesktopSQLEXPRESSDir">
+        </Directory>-->
+      </Directory>
+      <Directory Id="SystemFolder">
+      </Directory>
+		</Directory>    
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+      <Component Id="AD_SyncAgent" Guid="E8A58B7B-F031-4548-9BDD-7A6796C8460D">
+          <File Id="FILE_AD_SyncAgent"
+              Source="PrePack\ADSyncAgent\ADSyncAgentTool.exe"
+          KeyPath="yes" />
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

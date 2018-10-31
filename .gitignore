@@ -1,0 +1,9 @@
+
+SetupProject1/.vs/*
+SetupProject1/Bootstrapper1/bin/*
+SetupProject1/Bootstrapper1/SQLEXPRESS/SQLEXPR_x64_ENU.exe
+SetupProject1/CustomBA/obj/*
+SetupProject1/Bootstrapper1/obj/*
+SetupProject1/packages/*
+SetupProject1/SetupProject1/obj/*
+SetupProject1/SetupProject1/PrePack/*

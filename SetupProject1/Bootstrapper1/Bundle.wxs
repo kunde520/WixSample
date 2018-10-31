@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="Bootstrapper1" Version="1.0.0.0" Manufacturer="Trend Micro" UpgradeCode="f674e4e5-8b8a-4c23-a2b5-ecb884696943">
+		<!--<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />-->
+    <BootstrapperApplicationRef Id="ManagedBootstrapperApplicationHost" >
+      <Payload SourceFile="..\CustomBA\BootstrapperCore.config"/>
+      <Payload SourceFile="..\CustomBA\bin\Debug\CustomBA.dll"/>
+      <Payload SourceFile="..\CustomBA\bin\Debug\GalaSoft.MvvmLight.dll"/>
+      <Payload SourceFile="C:\Program Files (x86)\WiX Toolset v3.11\SDK\Microsoft.Deployment.WindowsInstaller.dll"/>
+    </BootstrapperApplicationRef>
+    <WixVariable Id="WixMbaPrereqLicenseUrl" Value=""/>
+    <WixVariable Id="WixMbaPrereqPackageId" Value=""/>
+    <Variable Name ="MyVal" Value="aaa"/>
+		<Chain>
+      <!-- TODO: Define the list of chained packages. -->
+      <ExePackage Id="SQLExpress" DisplayName="Main" SourceFile="SQLEXPRESS\SQLEXPR_x64_ENU.exe"
+                  InstallCommand="/QS /ACTION=Install /IAcceptSQLServerLicenseTerms=True /Features=SQLEngine /InstanceName=SQLEXPRESS /SECURITYMODE=SQL /SAPWD=&quot;P@ssw0rd&quot; /NPENABLED=1 /TCPENABLED=1 /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot; /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS=&quot;BUILTIN\ADMINISTRATORS&quot;"
+                  InstallCondition="CurrentSQLStatus = &quot;0&quot;">
+      </ExePackage>
+      <MsiPackage Id="Main" SourceFile="..\SetupProject1\bin\Debug\SetupProject1.msi" DisplayInternalUI="yes">
+       <MsiProperty Name="MY_PROPERTY" Value="[MyVar]" />
+      </MsiPackage>
+		</Chain>
+	</Bundle>
+</Wix>

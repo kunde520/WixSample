@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Component Id ="CMP_ToolsEXE" Directory="MyFirstSubDir" >
+      <File Id="FILE_XML"
+            Source="PrePack\ADSyncAgent\XmlUtility.dll"
+        KeyPath="yes" />
+      <RemoveFolder Id="RemoveFILE_XML" On="uninstall" Directory="MyFirstSubDir" />
+    </Component>
+    <!--<Component Id="SQL_EXPRESS" Directory="TempFolder">
+      <File Id="FILE_SQL_EXPRESS"
+          Source="PrePack\SQLEXPRESS\SQLEXPR_x64_ENU.exe"
+          KeyPath="yes"  />
+      <RemoveFolder Id="RemoveDesktopSQLEXPRESSDir" On="uninstall" Directory="TempFolder" />
+    </Component>-->
+  </Fragment>
+</Wix>
